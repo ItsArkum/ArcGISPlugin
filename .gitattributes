@@ -1,0 +1,5 @@
+src/android/*.aar filter=lfs diff=lfs merge=lfs -text
+*.xcframework/** filter=lfs diff=lfs merge=lfs -text
+*.aar filter=lfs diff=lfs merge=lfs -text
+**/*.xcframework/** filter=lfs diff=lfs merge=lfs -text
+**/*.aar filter=lfs diff=lfs merge=lfs -text

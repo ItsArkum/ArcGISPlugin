@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-arcgis" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>ArcGISPlugin</name>
+    <js-module name="ArcGISPlugin" src="www/ArcGISPlugin.js">
+        <clobbers target="cordova.plugins.ArcGISPlugin" />
+    </js-module>
+    <platform name="android">
+        <framework src="src/android/arcgis-android-200.2.0.aar" custom="true" type="gradleReference"/>
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="ArcGISPlugin">
+                <param name="android-package" value="cordova-plugin-arcgis.ArcGISPlugin" />
+            </feature>
+        </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml" />
+        <source-file src="src/android/ArcGISPlugin.java" target-dir="src/cordova-plugin-arcgis/ArcGISPlugin" />
+    </platform>
+    <platform name="ios">
+        <framework src="src/ios/ArcGIS.xcframework"
+             custom="true"
+             embed="true"/>
+        <framework src="src/ios/CoreArcGIS.xcframework"
+             custom="true"
+             embed="true"/>
+        <config-file parent="/*" target="config.xml">
+            <feature name="ArcGISPlugin">
+                <param name="ios-package" value="ArcGISPlugin" />
+            </feature>
+        </config-file>
+        <source-file src="src/ios/ArcGISPlugin.swift" />
+    </platform>
+</plugin>
