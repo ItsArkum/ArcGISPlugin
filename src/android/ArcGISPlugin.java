@@ -21,6 +21,27 @@ public class ArcGISPlugin extends CordovaPlugin {
       });
       return true;
     }
+    else if ("showOfflineMap".equals(action)) {
+      final String pkgPath = args.getString(0);
+      cordova.getThreadPool().execute(() -> {
+        try {
+          MobileMapPackage mmpk = new MobileMapPackage(pkgPath);
+          mmpk.loadAsync();
+          mmpk.addDoneLoadingListener(() -> {
+            if (mmpk.getLoadStatus() == LoadStatus.LOADED) {
+              mapView = new MapView(cordova.getContext());
+              mapView.setMap(mmpk.getMaps().get(0));
+              callbackCtx.success();
+            } else {
+              callbackCtx.error("Failed to load: " + mmpk.getLoadError().getMessage());
+            }
+          });
+        } catch (Exception e) {
+          callbackCtx.error(e.getMessage());
+        }
+      });
+      return true;
+    }
     return false;
   }
 }
